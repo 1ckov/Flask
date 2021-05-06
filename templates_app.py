@@ -2,6 +2,11 @@
 from flask import Flask, render_template
 
 app = Flask(__name__)
+@app.route('/')
+def index():
+    return "Home Page"
+
+
 # One could directly paste HTML code
 @app.route('/text')
 def index_text():

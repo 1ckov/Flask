@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<!---->
+<!-- A html tag with the necessary language for the page-->
+<!-- <html lang="bg/en/de/fr">-->
+{% block start %} {% endblock %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=firefox">
+    <!-- static linking-->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+    <!--                        |                           -->
+    <!--                        |                           -->
+    <!--                        v                           -->
+    <!-- <link rel="stylesheet" href="static/css/main.css"> -->
+
+
+    <!-- Elements from head-->
+    <!-- Example: <title> Title </title> -->
+
+    {% block head %} {% endblock %}
+</head>
+<body>
+    <!-- Elements from body-->
+    <!-- Example: <h1> Website </h1> -->
+
+    {% block body %} {% endblock %}
+</body>
+</html>
