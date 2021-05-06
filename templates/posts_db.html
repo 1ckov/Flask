@@ -1,0 +1,43 @@
+    {% extends 'base.html' %}
+
+    {% block start %}<html lang="en"> {% endblock %}
+    
+    {% block head %} 
+    <title>Posts</title> 
+    {% endblock %}
+
+
+    {% block body %} 
+    <h1> All Posts</h1>
+    <hr>
+    <h2>
+        Create new Blog Posts:
+    </h2>
+    <!-- 'action' is the url we call -->
+    <!-- 'method' is the way we are gonna submit data to the website -->
+    <form action="/posts" method='POST'>
+        Title: <input type='text' name='title' id='title'>
+        <br>
+        Posts: <input type="text" name='content' id='content'>
+        <br>
+        <input type="submit" value='Post'>
+    </form>
+    <hr>
+
+    <!-- For loops-->
+    {% for post in posts %}
+            <!-- Using dictionary entryes -->
+            <!-- <name.key ==> value -->
+            <h2> {{ post.title }} </h2>
+            
+            {% if post.author %}
+                <h3>By: {{ post.author }}</h3>
+            {% else %}
+                <h3>By: John/Jane Doe</h3>
+            {% endif %}
+
+            <p> {{ post.content }}</p>
+        
+        {% endfor %}
+    
+    {% endblock %}
