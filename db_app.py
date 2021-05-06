@@ -50,14 +50,18 @@ def index():
 @app.route('/posts', methods=["GET", "POST"])
 def posts():
     if request.method == 'POST':
+        #Filling database with the data from the Forms
         post_title = request.form['title']
         post_content = request.form['content']
         new_post = BlogPost(title=post_title, content=post_content, author='sa6o')
+
         # Onyl added to current session
         db.session.add(new_post)
+
         # Saves to db file
         db.session.commit()
         return redirect('/posts')
+        
     else:
         # We call our databse table BlogPost
         all_posts = BlogPost.query.order_by(BlogPost.date_posted).all()
