@@ -10,18 +10,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///post.db'
 # Links the DB to the Flask app
 db = SQLAlchemy(app)
 
-all_posts = [
-    {
-        'title': 'post 1',
-        'content': 'Imagine this is a post',
-        'author':'viki'
-    },
-    {
-        'title': 'post 2',
-        'content': 'Imagine this is a post'
-    }
-]
-
 # to interact with db we need to create a class, and inherit from db.Model
 class BlogPost(db.Model):
 
@@ -67,6 +55,29 @@ def posts():
         # We call our databse table BlogPost
         all_posts = BlogPost.query.order_by(BlogPost.date_posted).all()
         return render_template('posts_db.html', posts = all_posts)
+
+
+@app.route('/posts/delete/<int:id>')
+def delete(id):
+    post = BlogPost.query.get_or_404(id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect('/posts') 
+
+@app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    post = BlogPost.query.get_or_404(id)
+    if request.method == 'POST':
+        post.title = request.form['title']
+        post.author = request.form['author']
+        post.content = request.form['content']
+        db.session.commit()
+        return redirect('/posts')
+    else:
+        return render_template('edit.html', post=post)
+
+    
+
 
 if __name__ == "__main__":
     app.run(debug=True)
