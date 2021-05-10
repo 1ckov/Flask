@@ -14,7 +14,7 @@ all_posts = [
     {
         'title': 'post 1',
         'content': 'Imagine this is a post',
-        'author':'sa6o'
+        'author':'viki'
     },
     {
         'title': 'post 2',
@@ -53,7 +53,8 @@ def posts():
         #Filling database with the data from the Forms
         post_title = request.form['title']
         post_content = request.form['content']
-        new_post = BlogPost(title=post_title, content=post_content, author='sa6o')
+        post_author = request.form['author']
+        new_post = BlogPost(title=post_title, content=post_content, author=post_author)
 
         # Onyl added to current session
         db.session.add(new_post)
