@@ -33,7 +33,7 @@ class BlogPost(db.Model):
 
 @app.route('/')
 def index():
-    return "Hello World"
+    return render_template('index.html')
 
 @app.route('/posts', methods=["GET", "POST"])
 def posts():
@@ -56,9 +56,10 @@ def posts():
         all_posts = BlogPost.query.order_by(BlogPost.date_posted).all()
         return render_template('posts_db.html', posts = all_posts)
 
-
+# We havethe id we want to delete in the 
 @app.route('/posts/delete/<int:id>')
 def delete(id):
+    # 
     post = BlogPost.query.get_or_404(id)
     db.session.delete(post)
     db.session.commit()
